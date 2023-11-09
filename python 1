@@ -1,0 +1,48 @@
+# Import modules
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+# Math Score Vs Reading Score
+def line_plot(data, x, y, title, xlabel, ylabel):
+    plt.plot(data[x], data[y])
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.show()
+
+
+# Average Math Score by Gender
+def bar_plot(data, x, y, title, xlabel, ylabel):
+    data.groupby(x)[y].mean().plot(kind='bar')
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.show()
+
+
+# Parental Level of Education Distribution
+def pie_chart(data, x, title):
+    data[x].value_counts().plot(kind='pie', autopct='%1.1f%%')
+    plt.title(title)
+    plt.axis('equal')
+    plt.show()
+
+
+if __name__ == "__main__":
+    # Load the data
+    data = pd.read_csv('StudentsPerformance (1).csv')
+
+    # Line Plot
+    line_plot(data, 'math score', 'reading score',
+              'Math Score vs Reading Score', 'Math Score', 'Reading Score')
+
+    # Bar Plot
+    bar_plot(data, 'gender', 'math score',
+             'Average Math Score by Gender', 'Gender', 'Average Math Score')
+
+    # Pie Chart
+    pie_chart(data, 'parental level of education',
+              'Parental Level of Education Distribution')
+
